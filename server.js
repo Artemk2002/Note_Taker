@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
 
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/public/notes.html')));
-
+//Request to get the notes
 app.get('/api/notes',(req,res)=>{
     fs.readFile("./db/db.json","utf-8",(err,data)=>{
         if(err){
@@ -25,7 +25,7 @@ app.get('/api/notes',(req,res)=>{
         }
     })
 })
-
+//Creates a request to save the note
 app.post('/api/notes',(req,res)=>{
     fs.readFile("./db/db.json","utf-8",(err)=>{
         if(err){
@@ -41,8 +41,7 @@ app.post('/api/notes',(req,res)=>{
                 if(err){
                     console.log(err);
                     res.status(500).json({
-                        msg:"error",
-                        err:err
+                        msg:"error"
                     });
                 }else {
                     res.json({
@@ -53,7 +52,7 @@ app.post('/api/notes',(req,res)=>{
         }
     });
 });
-
+//port location for the sever
 app.listen(PORT, () => {
     console.log(`Hosted on PORT: ${PORT}!`);
 });
